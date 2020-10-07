@@ -16,7 +16,7 @@ Desafio proposto durante o [Zup Bootcamp 2](https://www.zup.com.br), composto po
 
 ### 1 - Proposta de Nova Conta
 
-Todo ``Cliente`` precisa solicitar uma `proposta de criação de nova conta de pessoa física` antes de qualquer outra coisa e este é justamente o processo que precisamos implementar. Só que tal processo precisa ser dividido em várias etapas, caso o contrário o cliente seria obrigado a passar um grande número de informações e poderíamos perder tudo por conta de uma falha de internet, falta de bateria no celular etc. A ideia aqui é minimizar isso. 
+Todo *`Cliente`* precisa solicitar uma *`proposta de criação de nova conta de pessoa física`* antes de qualquer outra coisa e este é justamente o processo que precisamos implementar. Só que tal processo precisa ser dividido em várias etapas, caso o contrário o cliente seria obrigado a passar um grande número de informações e poderíamos perder tudo por conta de uma falha de internet, falta de bateria no celular etc. A ideia aqui é minimizar isso. 
 
 1.1 - 
 
