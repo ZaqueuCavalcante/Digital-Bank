@@ -24,26 +24,26 @@ Além disso tudo, o software deve ser **testável** e **testado**. Todas as func
         - Security
         - ???
 
-### 1 - Proposta de Nova Conta / Primeira Interação / Cadastro
+### 1 - Proposta de Nova Conta
 
 Esse processo precisa ser **dividido** em várias etapas, caso o contrário o cliente seria obrigado a fornecer um grande número de informações de uma vez só e poderíamos **perder todos esses dados** por conta de uma falha na internet, no dispositivo do cliente ou na nossa própria aplicação.
 
 #### 1.1 - Cadastro de Informações Pessoais
 
 > Contexto
-- Todo **`Cliente`** precisa solicitar uma *`proposta de criação de nova conta de pessoa física`*.
+- Todo novo **`Cliente`** precisa solicitar uma *`proposta de criação de uma nova conta de pessoa física`*.
 
 > Necessidades
 - Adquirir do cliente as seguintes informações básicas:
     - Nome
     - Sobrenome
-    - Email
-    - CNH (com CPF)
+    - E-mail
+    - CPF
     - Data de Nascimento
 
 > Restrições
 - Todos os dados são obrigatórios.
-- O Email e a CNH:
+- O Email e o CPF:
     - precisam respeitar seus respectivos **formatos**.
     - não podem ser **duplicados**.
 - O cliente deve ter mais que 18 anos de idade.
@@ -75,13 +75,13 @@ Esse processo precisa ser **dividido** em várias etapas, caso o contrário o cl
 - Status code 201 e header location preenchido para o próximo passo do cadastro.
 - Status code 400, em caso de falha de qualquer validação e json de retorno com as informações.
 
-#### 1.3 - Validação de CNH
+#### 1.3 - Validação de CPF
 
 > Contexto
-- O **`Cliente`** precisa *`enviar uma foto (frente e verso) da sua CNH`*.
+- O **`Cliente`** precisa *`enviar uma foto (frente) do seu CPF`*.
 
 > Necessidades
-- Arquivos que representem a frente e o verso de uma CNH.
+- Arquivos que representem a frente  de um CPF.
 - Ter amostras válidas e inválidas para teste.
 
 > Restrições
@@ -114,7 +114,7 @@ Esse processo precisa ser **dividido** em várias etapas, caso o contrário o cl
 - O json deve estar organizado e estruturado de acordo com cada tipo de dado.
 
 > Resultados Esperados
-- Status code 422,, caso os passos anteriores não estiverem completos.
+- Status code 422, caso os passos anteriores não estiverem completos.
 
 #### 1.5 - Processamento da Proposta
 
@@ -136,15 +136,17 @@ Esse processo precisa ser **dividido** em várias etapas, caso o contrário o cl
 - A Agência possui 4 dígitos.
 - A Conta possui 8 dígito.
 - Ambas podem ser geradas aleatoriamente (abstrair para usar um algoritmo específico depois).
+- O Código do Banco possui 3 dígitos.
 - O Saldo inicial deve ser nulo (igual a zero (0)).
-- O processo de criação deve ser disparado de forma a **não bloquear o retorno relativo ao aceite do usuário**: ?????
-    - o cliente aceita e depois a conta é criada e o email informativo enviado. Isso é muito importante! ?????
+- O processo de criação deve ser disparado de forma a **não bloquear o retorno relativo ao aceite do usuário**:
+    - o cliente aceita e recebe uma menssagem que a conta será criada.
+    - a tela não deve ficar parada esperando até que a conta seja criada.
 
 > Detalhes Adicionais
 - O e-mail não precisa ser real:
     - o sistema deve estar preparado para lidar com e-mails falsos em ambiente de desenvolvimento e reais em de produção.
 - O processo de criação de conta só acontece depois que um **sistema externo** valida a documentação apresentada:
-    - a proposta deverá ter um status informando que ainda não foi liberada.
+    - a proposta deverá ter um **status** informando que ainda não foi liberada.
     - após a liberação, o status da proposta deve ser alterado e a conta, criada.
     - em caso de erro, precisamos tentar pelo menos 2x antes de desistir. (parametrizar, com intervalo de tempo entre os requests...)
 
@@ -184,16 +186,25 @@ Esse processo precisa ser **dividido** em várias etapas, caso o contrário o cl
 ### 3 - Recebimento de Dinheiro via Transferência
 
 > Contexto
-- 
+- O **`Cliente`** pode *`receber dinheiro via transferência bancária`*.
+- O sistema possui um endpoint que recebe notificações (feitas pelo mesmo banco ou um diferente) sobre novas transferências.
 
 > Necessidades
-- 
+- Informações das duas contas envolvidas, para armazenamento nos dois bancos.
+- Toda transferência possui um código único (ID).
+- Atualizar os saldos das contas creditada e debitada.
+
+> Ponto de Atenção
+- Duas ou mais requisições de transferência para a mesma conta podem chegar ao mesmo tempo.
+- Elas não precisam ser processadas em série.
+- Processar em paralelo usando threads?
 
 > Restrições
-- 
+- Todas as informações relativas a transferência são obrigatórias. 
 
 > Resultados Esperados
-- 
+- Status code 400, caso ocorra algum problema de validação (retornar json).
+- Status code 200, caso dê tudo certo.
 
 ### 4 - Transferência para Contas de Outros Bancos
 
