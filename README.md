@@ -22,7 +22,8 @@ Além disso tudo, o software deve ser **testável** e **testado**. Todas as func
     - Módulos adicionais do Spring, como:
         - Web
         - Security
-        - ???
+	- Dev Tools
+	- H2
 
 ### 1 - Proposta de Nova Conta
 
@@ -257,23 +258,6 @@ Esse processo precisa ser **dividido** em várias etapas, caso o contrário o cl
 - Status code 200, caso tudo dê certo.
 
 ### 5 - Transferências para Contas do Mesmo Banco
-
-> Contexto
-- 
-
-> Necessidades
-- 
-
-> Restrições
-- 
-
-> Resultados Esperados
-- 
-
-
-
-
-#### 2. - ?
 
 > Contexto
 - 
