@@ -4,6 +4,7 @@ import br.com.zup.digitalbank.dominio.clientes.Cliente;
 import br.com.zup.digitalbank.dominio.clientes.dados.pessoais.DataDeNascimento;
 import br.com.zup.digitalbank.dominio.clientes.dados.pessoais.Email;
 import br.com.zup.digitalbank.dominio.clientes.dados.pessoais.Nome;
+import br.com.zup.digitalbank.dominio.clientes.dados.pessoais.Senha;
 import br.com.zup.digitalbank.dominio.clientes.dados.pessoais.endereco.*;
 import br.com.zup.digitalbank.dominio.clientes.documentos.CNPJ;
 import br.com.zup.digitalbank.dominio.clientes.documentos.CPF;
@@ -11,12 +12,14 @@ import br.com.zup.digitalbank.dominio.clientes.documentos.Documento;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.time.Month;
 
 @SpringBootApplication
 public class DigitalbankApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		SpringApplication.run(DigitalbankApplication.class, args);
 
 		Nome nome = new Nome("Zaqueu", "do Vale Cavalcante");
@@ -43,6 +46,9 @@ public class DigitalbankApplication {
 		System.out.println(documento.numero());
 
 		Cliente cliente = new Cliente(42L, nome, email, dataDeNascimento, endereco, documento);
+
+		Senha senha = new Senha("1Z34z678");
+		System.out.println(senha.encodada());
 
 	}
 

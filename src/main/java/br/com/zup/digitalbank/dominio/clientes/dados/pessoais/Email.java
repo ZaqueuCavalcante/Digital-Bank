@@ -22,11 +22,11 @@ public class Email {
         return endereco;
     }
 
-    private void validar(String endereco){
-        Matcher matcher = pattern.matcher(endereco);
-        if (endereco == null || endereco.isEmpty()) {
+    private void validar(String endereco) {
+        if (endereco.isEmpty()) {
             throw new IllegalArgumentException("O endereço de e-mail é obrigatório.");
         }
+        Matcher matcher = pattern.matcher(endereco);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("Endereço de e-mail inválido.");
         }

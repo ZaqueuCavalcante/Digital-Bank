@@ -13,7 +13,7 @@ public class CEP {
     }
 
     public String formatado() {
-        return "CEP " + prefixo + "-" + sufixo;
+        return prefixo + "-" + sufixo;
     }
 
     private void validarPrefixo(String prefixo) {

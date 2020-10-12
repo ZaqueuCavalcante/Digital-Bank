@@ -18,7 +18,7 @@ public class Endereco {
 
     public String completo() {
         return rua.completa() + ", " + bairro.nome() + " - " +
-                cidade.nome() + " " + estado.UF() + " - " + CEP.formatado();
+                cidade.nome() + " " + estado.UF() + " - " + "CEP " + CEP.formatado();
     }
 
 }
