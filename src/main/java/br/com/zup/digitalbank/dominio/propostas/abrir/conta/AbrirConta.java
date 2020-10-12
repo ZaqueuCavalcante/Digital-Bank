@@ -1,4 +1,6 @@
 package br.com.zup.digitalbank.dominio.propostas.abrir.conta;
 
-public class AbrirConta {
+import br.com.zup.digitalbank.dominio.propostas.Proposta;
+
+public class AbrirConta extends Proposta {
 }

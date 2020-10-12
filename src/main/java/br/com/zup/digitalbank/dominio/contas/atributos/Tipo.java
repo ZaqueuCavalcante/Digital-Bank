@@ -1,20 +1,30 @@
 package br.com.zup.digitalbank.dominio.contas.atributos;
 
-public class Tipo {
+public enum Tipo {
 
-    private String numero;
-    private static final short QUANTIDADE_DE_DIGITOS = 3;
+    CORRENTE_PF("001"),
+    POUPANCA_PF("011"),
+    CORRENTE_PJ("003"),
+    POUPANCA_PJ("013"),
+    INVESTIMENTO("042");
 
-    public Tipo(String numero) {
-        validar(numero);
-        this.numero = numero;
+    private final String codigo;
+
+    Tipo(String codigo) {
+        this.codigo = codigo;
     }
 
-    private static void validar(String numero) {
-        if (numero.length() != QUANTIDADE_DE_DIGITOS) {
-            throw new IllegalArgumentException("O tipo da conta deve possuir " +
-                    QUANTIDADE_DE_DIGITOS + " dígitos.");
+    String codigo() {
+        return codigo;
+    }
+
+    public static Tipo nome(String codigo) {
+        for (Tipo nome : Tipo.values()) {
+            if (nome.codigo().equals(codigo)) {
+                return nome;
+            }
         }
+        throw new IllegalArgumentException("Código de tipo de conta inválido.");
     }
 
 }

@@ -5,9 +5,12 @@ import java.util.Currency;
 public class Saldo {
 
     private double valor = 0.00;
-    private static final String MOEDA = "R$";
 
     public Saldo() { }
+
+    public double valor() {
+        return valor;
+    }
 
     public void creditar(double quantia) {
         validarQuantia(quantia);

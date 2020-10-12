@@ -2,25 +2,25 @@ package br.com.zup.digitalbank.dominio.instituicoes;
 
 public enum Bancos {
 
-    BB(001),
-    BRADESCO(237),
-    CAIXA(104),
-    ITAU(341),
-    SANTANDER(033);
+    BB("001"),
+    BRADESCO("237"),
+    CAIXA("104"),
+    ITAU("341"),
+    SANTANDER("033");
 
-    private final int codigo;
+    private final String codigo;
 
-    Bancos(int codigo) {
+    Bancos(String codigo) {
         this.codigo = codigo;
     }
 
-    public int codigo() {
+    public String codigo() {
         return codigo;
     }
 
-    public static Bancos nome(int codigo) {
+    public static Bancos nome(String codigo) {
         for (Bancos nome : Bancos.values()) {
-            if (nome.codigo() == codigo) {
+            if (nome.codigo().equals(codigo)) {
                 return nome;
             }
         }

@@ -1,4 +1,4 @@
 package br.com.zup.digitalbank.dominio.contas;
 
-public class ContaMEI {
+public class ContaTeste {
 }

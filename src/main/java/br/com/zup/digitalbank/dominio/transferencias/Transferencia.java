@@ -1,50 +1,54 @@
 package br.com.zup.digitalbank.dominio.transferencias;
 
 import br.com.zup.digitalbank.dominio.contas.Conta;
-import org.apache.tomcat.jni.Local;
 
-import java.time.DayOfWeek;
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.temporal.TemporalAmount;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class Transferencia {
+public class Transferencia extends TimerTask {
 
-    private double valor = 0.00;
-    private static final String MOEDA = "R$";
-
+    protected double valor;
     protected double taxa;
 
-    private LocalDate dataDeAgendamento;
+    protected Conta contaDebitada;
+    protected Conta contaCreditada;
+
+    private DataDeAgendamento dataDeAgendamento;
     private LocalDate dataDeRealizacao;
 
     private String descricao;
 
-    public Transferencia(double valor, Conta contaDebitada, Conta contaCreditada, LocalDate dataDeAgendamento) {}
-
-    private void efetuar() {}
-
-    private void agendarPara(LocalDate data) {
-        if (forDiaUtil(data)) {
-            this.dataDeAgendamento = data;
-        } else {
-            reagendarParaProximoDiaUtil(data);
-        }
+    public Transferencia(double valor, Conta contaDebitada, Conta contaCreditada, DataDeAgendamento dataDeAgendamento) {
+        this.valor = valor;
+        this.dataDeAgendamento = dataDeAgendamento;
+        this.contaDebitada = contaDebitada;
+        this.contaCreditada = contaCreditada;
+        agendar();
     }
 
-    private boolean forDiaUtil(LocalDate data) {
-        DayOfWeek dia = data.getDayOfWeek();
-        return (dia != DayOfWeek.SATURDAY || dia != DayOfWeek.SUNDAY);
+    @Override
+    public void run() {
+        contaDebitada.debitar(valor);
+        contaCreditada.creditar(valor);
+        dataDeRealizacao = LocalDate.now();
     }
 
-    private void reagendarParaProximoDiaUtil(LocalDate data) {
-        DayOfWeek dia = data.getDayOfWeek();
-        if (dia == DayOfWeek.SATURDAY) {
-            this.dataDeAgendamento = data.plusDays(2);
-        } else {
-            this.dataDeAgendamento = data.plusDays(1);
-        }
+    private void agendar() {
+        Timer timer = new Timer();
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        Instant instante = dataDeAgendamento.data().atStartOfDay(defaultZoneId).toInstant();
+        timer.schedule(this, Date.from(instante));
     }
 
-    public void cancelar() {}
+    private void reagendar(DataDeAgendamento dataDeAgendamento) {
+        this.dataDeAgendamento = dataDeAgendamento;
+    }
+
+    public void cancelar() {
+    }
 
 }
