@@ -46,7 +46,7 @@ public class SaldoTeste {
     @Test
     public void creditarValorNegativo() {
         Saldo saldo = new Saldo();
-        double valor = -43.0;
+        double valor = -42.0;
         assertThrows(IllegalArgumentException.class, () ->
                 saldo.creditar(valor));
     }

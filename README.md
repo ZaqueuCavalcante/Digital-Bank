@@ -14,16 +14,7 @@ Desafio proposto durante o [Zup Bootcamp 2](https://www.zup.com.br), composto po
 Além disso tudo, o software deve ser **testável** e **testado**. Todas as funcionalidades essenciais para o negócio devem ser completamente testadas. Isso irá reduzir os custos para fazer alterações no código e refatorá-lo, dando a segurança que ele continua se comportando como deveria, mesmo após esses processos.
 
 ### 0 - Setup
-- Criar projeto [Spring Boot](https://start.spring.io/):
-    - Versão do Java
-    - Empacotamento
-    - Gerenciador de dependências
-    - Versão do Spring
-    - Módulos adicionais do Spring, como:
-        - Web
-        - Security
-	- Dev Tools
-	- H2
+- Criar projeto [Spring Boot](https://start.spring.io/).
 
 ### 1 - Proposta de Nova Conta
 
@@ -270,5 +261,3 @@ Esse processo precisa ser **dividido** em várias etapas, caso o contrário o cl
 
 > Resultados Esperados
 - 
- 
-
