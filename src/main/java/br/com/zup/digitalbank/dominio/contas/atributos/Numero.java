@@ -10,10 +10,19 @@ public class Numero {
         this.numero = numero;
     }
 
+    public String ver() {
+        return numero;
+    }
+
     private static void validar(String numero) {
         if (numero.length() != QUANTIDADE_DE_DIGITOS) {
-            throw new IllegalArgumentException("A conta deve possuir " +
+            throw new IllegalArgumentException("O número da conta deve possuir " +
                     QUANTIDADE_DE_DIGITOS + " dígitos.");
+        }
+        for (char caractere : numero.toCharArray()) {
+            if (!Character.isDigit(caractere)) {
+                throw new IllegalArgumentException("O número da conta deve ser formado apenas por dígitos.");
+            }
         }
     }
 

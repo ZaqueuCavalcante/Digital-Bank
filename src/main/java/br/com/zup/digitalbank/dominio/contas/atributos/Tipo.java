@@ -14,7 +14,7 @@ public enum Tipo {
         this.codigo = codigo;
     }
 
-    String codigo() {
+    public String codigo() {
         return codigo;
     }
 

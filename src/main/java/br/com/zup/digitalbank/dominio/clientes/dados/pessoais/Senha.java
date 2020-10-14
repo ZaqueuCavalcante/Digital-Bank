@@ -27,8 +27,8 @@ public class Senha {
     }
 
     private boolean possuiDigitoEntre(String senha, char limiteInferior, char limiteSuperior) {
-        for (char digito : senha.toCharArray()) {
-            if (digito >= limiteInferior && digito <= limiteSuperior) {
+        for (char caractere : senha.toCharArray()) {
+            if (caractere >= limiteInferior && caractere <= limiteSuperior) {
                 return true;
             }
         }

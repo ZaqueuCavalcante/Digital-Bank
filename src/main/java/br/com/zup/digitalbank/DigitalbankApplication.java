@@ -14,9 +14,10 @@ import br.com.zup.digitalbank.dominio.contas.atributos.Agencia;
 import br.com.zup.digitalbank.dominio.contas.atributos.DigitoVerificador;
 import br.com.zup.digitalbank.dominio.contas.atributos.Numero;
 import br.com.zup.digitalbank.dominio.contas.atributos.Tipo;
-import br.com.zup.digitalbank.dominio.transferencias.DataDeAgendamento;
+import br.com.zup.digitalbank.dominio.transferencias.agendamentos.DataDeAgendamento;
 import br.com.zup.digitalbank.dominio.transferencias.Transferencia;
-import org.apache.tomcat.jni.Local;
+import br.com.zup.digitalbank.dominio.transferencias.agendamentos.DataDeAgendamentoComRestricoes;
+import br.com.zup.digitalbank.dominio.transferencias.externas.TED;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -75,11 +76,11 @@ public class DigitalbankApplication {
 		System.out.println(contaDebitada.saldo());
 		System.out.println(contaCreditada.saldo());
 
-		Transferencia transferencia = new Transferencia(
+		Transferencia transferencia = new TED(
 				100,
 				contaDebitada,
 				contaCreditada,
-				new DataDeAgendamento(LocalDate.of(2020, Month.OCTOBER, 13)));
+				new DataDeAgendamentoComRestricoes(LocalDate.of(2020, Month.OCTOBER, 13)));
 
 		try {
 			Thread.sleep(1000);
@@ -89,6 +90,7 @@ public class DigitalbankApplication {
 
 		System.out.println(contaDebitada.saldo());
 		System.out.println(contaCreditada.saldo());
+		System.out.println(transferencia.taxa());
 	}
 
 }

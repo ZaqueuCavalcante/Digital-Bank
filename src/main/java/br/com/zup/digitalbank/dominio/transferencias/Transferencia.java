@@ -1,6 +1,7 @@
 package br.com.zup.digitalbank.dominio.transferencias;
 
 import br.com.zup.digitalbank.dominio.contas.Conta;
+import br.com.zup.digitalbank.dominio.transferencias.agendamentos.DataDeAgendamento;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -9,10 +10,11 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Transferencia extends TimerTask {
+public abstract class Transferencia extends TimerTask {
+
+    protected Timer timer = new Timer();
 
     protected double valor;
-    protected double taxa;
 
     protected Conta contaDebitada;
     protected Conta contaCreditada;
@@ -30,6 +32,17 @@ public class Transferencia extends TimerTask {
         agendar();
     }
 
+    public double valor() {
+        return valor;
+    }
+
+    public abstract double taxa();
+
+
+    public void adicionarDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     @Override
     public void run() {
         contaDebitada.debitar(valor);
@@ -38,7 +51,6 @@ public class Transferencia extends TimerTask {
     }
 
     private void agendar() {
-        Timer timer = new Timer();
         ZoneId defaultZoneId = ZoneId.systemDefault();
         Instant instante = dataDeAgendamento.data().atStartOfDay(defaultZoneId).toInstant();
         timer.schedule(this, Date.from(instante));
@@ -49,6 +61,8 @@ public class Transferencia extends TimerTask {
     }
 
     public void cancelar() {
+        timer.cancel();
+        timer.purge();
     }
 
 }

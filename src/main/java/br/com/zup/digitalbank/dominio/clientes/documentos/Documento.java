@@ -5,8 +5,10 @@ public abstract class Documento {
     protected String numero;
 
     protected Documento(String numero) {
-        this.numero = numero;
+        validar(numero);
     }
+
+    protected abstract void validar(String numero);
 
     public String numero() {
         return numero;

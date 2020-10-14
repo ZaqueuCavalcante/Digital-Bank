@@ -15,8 +15,17 @@ public class Favoritos {
         favorecidos.add(conta);
     }
 
-    public void excluir(Conta conta) {
+    public void remover(Conta conta) {
         favorecidos.remove(conta);
+    }
+
+    public void editar(Conta aSerEditada, Conta editada) {
+        favorecidos.remove(aSerEditada);
+        favorecidos.add(editada);
+    }
+
+    public Set<Conta> verTodos() {
+        return favorecidos;
     }
 
 }

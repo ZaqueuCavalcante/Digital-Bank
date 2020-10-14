@@ -9,6 +9,10 @@ public class DigitoVerificador {
         this.digito = digito;
     }
 
+    public char ver() {
+        return digito;
+    }
+
     private static void validar(char digito) {
         if (!Character.isDigit(digito)) {
             throw new IllegalArgumentException("O dígito verificador precisa ser um número de 0 a 9.");

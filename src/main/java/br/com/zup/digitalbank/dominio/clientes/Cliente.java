@@ -6,7 +6,6 @@ import br.com.zup.digitalbank.dominio.clientes.dados.pessoais.Nome;
 import br.com.zup.digitalbank.dominio.clientes.dados.pessoais.endereco.Endereco;
 import br.com.zup.digitalbank.dominio.clientes.documentos.Documento;
 import br.com.zup.digitalbank.dominio.contas.Conta;
-import br.com.zup.digitalbank.dominio.transferencias.Transferencia;
 
 public class Cliente {
 
@@ -30,8 +29,8 @@ public class Cliente {
         this.documento = documento;
     }
 
-    public void realizar(Transferencia transferencia, Conta conta) { }
+    public void realizarTransferencia() { }
 
-    public void receber(Transferencia transferencia, Conta conta) { }
+    public void receberTransferencia() { }
 
 }

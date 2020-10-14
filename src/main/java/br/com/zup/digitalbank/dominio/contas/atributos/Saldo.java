@@ -1,7 +1,5 @@
 package br.com.zup.digitalbank.dominio.contas.atributos;
 
-import java.util.Currency;
-
 public class Saldo {
 
     private double valor = 0.00;

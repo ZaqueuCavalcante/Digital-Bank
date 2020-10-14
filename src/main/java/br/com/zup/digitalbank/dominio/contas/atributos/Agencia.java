@@ -10,6 +10,10 @@ public class Agencia {
         this.numero = numero;
     }
 
+    public String numero() {
+        return numero;
+    }
+
     private static void validar(String numero) {
         if (numero.length() != QUANTIDADE_DE_DIGITOS) {
             throw new IllegalArgumentException("A agência deve possuir " +

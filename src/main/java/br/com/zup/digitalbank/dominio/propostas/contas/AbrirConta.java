@@ -1,4 +1,4 @@
-package br.com.zup.digitalbank.dominio.propostas.abrir.conta;
+package br.com.zup.digitalbank.dominio.propostas.contas;
 
 import br.com.zup.digitalbank.dominio.propostas.Proposta;
 

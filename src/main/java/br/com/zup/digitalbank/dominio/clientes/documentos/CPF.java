@@ -12,4 +12,12 @@ public class CPF extends Documento {
         super(numero);
     }
 
+    @Override
+    protected void validar(String numero) {
+        if(numero.length() != 11) {
+            throw new IllegalArgumentException("CPF inválido.");
+        }
+        this.numero = numero;
+    }
+
 }
