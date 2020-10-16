@@ -20,8 +20,8 @@ public abstract class Transferencia extends TimerTask {
     protected Conta contaDebitada;
     protected Conta contaCreditada;
 
-    private DataDeAgendamento dataDeAgendamento;
-    private LocalDate dataDeRealizacao;
+    protected DataDeAgendamento dataDeAgendamento;
+    protected LocalDate dataDeRealizacao;
 
     private String descricao;
 
