@@ -7,257 +7,117 @@ Desafio proposto durante o [Zup Bootcamp 2](https://www.zup.com.br), composto po
 1) Entrega do projeto, via GitHub.
 2) Produção de um vídeo contando como foi o **processo de entender e desenvolver** a aplicação.
 
+
 ## Especificações do Projeto
 
 É fundamental entender que qualquer **software** deve ser, em essência, *soft*. Ou seja, que ele deve ser macio, flexível, passível de sofrer alterações, ser evoluido, extendido e **mantido**. Neste projeto, esse último atributo receberá um maior enfoque, mas sem deixar de lado os demais.
 
 Além disso tudo, o software deve ser **testável** e **testado**. Todas as funcionalidades essenciais para o negócio devem ser completamente testadas. Isso irá reduzir os custos para fazer alterações no código e refatorá-lo, dando a segurança que ele continua se comportando como deveria, mesmo após esses processos.
 
-### 0 - Setup
-- Criar projeto [Spring Boot](https://start.spring.io/).
+As especificações sobre os processos de Cadastro e de Transferência de Dinheiro podem ser encontradas nos seguintes arquivos:
+- [Cadastro de Cliente](https://github.com/ZaqueuCavalcante/Digital-Bank/blob/main/CADASTRO.md)
+- [Transferência de Dinheiro](https://github.com/ZaqueuCavalcante/Digital-Bank/blob/main/TRANSFERENCIA.md)
 
-### 1 - Proposta de Nova Conta
 
-Esse processo precisa ser **dividido** em várias etapas, caso o contrário o cliente seria obrigado a fornecer um grande número de informações de uma vez só e poderíamos **perder todos esses dados** por conta de uma falha na internet, no dispositivo do cliente ou na nossa própria aplicação.
+## Pensando sobre o problema/domínio/negócio
 
-#### 1.1 - Cadastro de Informações Pessoais
+Aqui, vamos tentar *`entender e modelar o domínio`*, sob a perspectiva do **Domain Driven Design**.
 
-> Contexto
-- Todo novo **`Cliente`** precisa solicitar uma *`proposta de criação de uma nova conta de pessoa física`*.
+Vamos pensar sobre:
+- As *`Entidades`* que compõe o domínio: Clientes, Contas, Transferências, Pagamentos, Empréstimos, Investimentos...
+- Os *`Objetos de Valor`*, blocos de construção fundamentais, que permiam todo o domínio: a Agencia de uma conta, o Endereço de um cliente, a Data de Agendamento de um transferência...
+- Os *`Processos`* que relacionam e alteram o estado dessas entidades: *abrir uma conta*, *efetuar uma transferência*, *realizar um pagamento*, *requisitar um empréstimo*, *investir em um ativo*...
+- Como podemos **abstratir e modelar** esses elementos fundamentais que compõe o domínio.
+- Como agrupá-los, em função dos **Contextos Delimitados** a que pertencem.
+- Como **traduzir** tudo isso em software, para **atacar a complexidade** do domínio e realmente **impactar** o negócio de maneira significativa.
 
-> Necessidades
-- Adquirir do cliente as seguintes informações básicas:
-    - Nome
-    - Sobrenome
-    - E-mail
-    - CPF
-    - Data de Nascimento
+### Conhecimentos Fundamentais
 
-> Restrições
-- Todos os dados são obrigatórios.
-- O Email e o CPF:
-    - precisam respeitar seus respectivos **formatos**.
-    - não podem ser **duplicados**.
-- O cliente deve ter mais que 18 anos de idade.
+As perguntas e respostas a seguir visam colocar em perpectiva o problema a ser resolvido. São informações extremamente superficiais, em contraste com a gigantesca complexidade do Sistema Financeiro, mas que ainda assim configuram um bom ponto de partida.
 
-> Resultados Esperados
-- Status code 201 e header location preenchido para o próximo passo do cadastro.
-- Status code 400, em caso de falha de qualquer validação e json de retorno com as informações.
+Um posterior aprofundamento deve ser feito através da **colaboração** entre profissionais de tecnologia e os ditos **especialistas no domínio**.
 
-#### 1.2 - Cadastro de Endereço
+- O que é um banco digital?
+    - É um modelo de banco que surgiu para suprir com **tecnologia e eficiência** um mercado que sofria com a **burocracia** imposta pelos grandes bancos tradicionais. Por isso, eles estão **mudando a forma** como muitos cuidam de suas **finanças pessoais**.
 
-> Contexto
-- O **`Cliente`** precisa *`fornecer seu endereço de moradia`*.
+- Pra quê eles existem? Que problema resolvem?
+    - Para **facilitar o acesso aos serviços financeiros** que os bancos tradicionais ofereciam, reduzindo a burocracia envolvida nos processos, a necessidade de enfrentar filas e a da presença física do cliente na agência (tornando-a obsoleta).
+    - Além disso, eles buscam atacar problemas como tarifas elevadas, falta de transparência, conflito de interesses, entre outros.
 
-> Necessidades
-- As seguintes informações devem ser adquiridas:
-    - CEP
-    - Rua
-    - Bairro
-    - Complemento
-    - Cidade
-    - Estado
+- O que leva as pessoas a abrirem uma conta num banco digital?
+    - Atendimento facilitado
+    - Ampla variedade de tipos de pagamento
+    - Interface intuitiva e fácil de utilizar
+    - Parcerias e serviços adicionais (ex.: cashback)
+    - Praticidade
+    - Eficiência
+    - Agilidade no atendimento
+    - Serviços disponíveis em qualquer lugar
+    - Taxas atrativas
 
-> Restrições
-- Todos os dados são obrigatórios.
-- O CEP deve estar em **formato adequado**.
-- Cidade e Estado podem ser **campos abertos**.
+- Quais são os principais **serviços** oferecidos por eles?
+    - Conta-corrente
+    - Conta Poupança
+    - Cartão de crédito
+    - Investimentos
+    - Seguros
+    - Consórcios
+    - Empréstimos
+    - Transferências
+    - Pagamentos (contas, boletos, guias de impostos)
 
-> Resultados Esperados
-- Status code 201 e header location preenchido para o próximo passo do cadastro.
-- Status code 400, em caso de falha de qualquer validação e json de retorno com as informações.
+- Como um banco digital ganha dinheiro?
+    - Cobrando **taxas** por seus serviços e **juros** sobre empréstimos.
+    - Realizando **investimentos** em tecnologia, novos produtos, títulos, ações...
 
-#### 1.3 - Validação de CPF
+- Como um banco digital pode economizar dinheiro?
+    - Não têm gastos com agência e sua manutenção.
+    - Quantidade de funcionários reduzida, em relação à um banco tradicional.
+    - Automatização de processos, usando tecnologia.
 
-> Contexto
-- O **`Cliente`** precisa *`enviar uma foto (frente) do seu CPF`*.
+- Quais as principais instituições reguladoras do mercado financeiro nacional?
+    - Conselho Monetário Nacional (CMN):
+        - Órgão normativo máximo do sistema financeiro brasileiro.
+        - Seu papel é expedir normas e diretrizes a serem fiscalizadas por outros órgãos supervisores que compõem o sistema financeiro.
+    - Banco Central (BC, BCB ou BACEN):
+        - Principal autoridade monetária do Brasil.
+        - Responsável pelo controle da inflação do país.
+        - Responsável pela regulação e supervisão das instituições financeiras em funcionamento no Brasil.
+    - Comissão de Valores Mobiliários (CVM):
+        - Responsável por normatizar as regras para o registro de companhias de capital aberto, para a emissão e distribuição dos mais diversos ativos negociados no mercado financeiro, além de fiscalizar e punir quem não cumpre as suas regras.
+    - Superintendência de Seguros Privados (SUSEP):
+        - Atua no mercado das seguradoras, entidades abertas de previdência e sociedades de capitalização.
+        - Define as características gerais dos contratos de seguros, previdência privada aberta e capitalização, fiscalizando e punindo os eventuais descumprimentos das suas regras.
+    - Superintendência Nacional de Previdência Complementar (PREVIC):
+        - Responsável pela supervisão e fiscalização das entidades fechadas de previdência complementar.
+    - Associação Brasileira das Entidades dos Mercados Financeiro e de Capitais (ANBIMA):
+        - Não é vinculada ao governo.
+        - Representa as instituições do mercado de capitais brasileiro, como bancos, corretoras, gestoras de recursos, entre outros agentes.
+        - É um órgão de autorregulação, emitindo códigos e regras que não são de cumprimento obrigatório, mas que estimulam as melhores práticas nesse mercado.
+        - Emite certificações para os profissionais do ramo e calcula índices de referência amplamente utilizados no mercado financeiro.
+    - B3, a bolsa de valores oficial do Brasil:
+        - Não é vinculada ao governo, sendo uma empresa independente que atua como mercado para a negociação de uma série de títulos e valores mobiliários.
+        - Emite regras de funcionamento e as fiscaliza, atuando em conjunto com a CVM.
+        - Responsável pelo registro e controle de diversos dados referentes às emissões de valores mobiliários e a sua negociação.
 
-> Necessidades
-- Arquivos que representem a frente  de um CPF.
-- Ter amostras válidas e inválidas para teste.
+> Fontes de pesquisa:
 
-> Restrições
-- Todos os arquivos são obrigatórios.
+> [Banco digital: qual é o melhor?](https://blog.magnetis.com.br/bancos-digitais/)
 
-> Decisão de Projeto
-- Existe um jeito melhor de tratar esses uploads, ao invés de fazer o arquivo chegar pela aplicação? 
+> [Como os bancos digitais ganham dinheiro?](https://fintech.com.br/blog/fintech/como-bancos-digitais-ganham-dinheiro/)
 
-> Resultados Esperados
-- Status code 201 e header location preenchido para o próximo passo do cadastro.
-- Status code 400, em caso de falha de qualquer validação e json de retorno com as informações.
-- Status code 404, caso a proposta que supostamente deveria estar associada com esse passo não exista.
-- Status code 422, caso os passos anteriores não estiverem completos.
+> [Órgãos reguladores do Mercado financeiro nacional](https://www.parmais.com.br/blog/orgaos-reguladores-do-mercado-financeiro/)
 
-#### 1.4 - Confirmação da Corretude das Informações Fornecidas
 
-> Contexto
-- O **`Cliente`** precisa *`visualizar todos os dados que forneceu e confirmar que todos estão corretos`*.
 
-> Necessidades
-- Retornar um json com todas as informações fornecidas para que o front-end às exiba ao cliente.
-- Caso o cliente ateste que as informações estão corretas:
-    - informar que a conta será criada.
-    - enviar um e-mail de boas vindas.
-- Caso contrário:
-    - registrar a interação.
-    - enviar um e-mail implorando para que ele aceite.
 
-> Restrições
-- O json deve estar organizado e estruturado de acordo com cada tipo de dado.
 
-> Resultados Esperados
-- Status code 422, caso os passos anteriores não estiverem completos.
 
-#### 1.5 - Processamento da Proposta
 
-> Contexto
-- O sistema precisa *`processar os dados enviados pelo cliente`*.
 
-> Necessidades
-- Criar uma nova conta, com os seguintes atributos:
-    - Agência
-    - Conta
-    - Código do Banco
-    - Saldo
-- Atrelar a conta ao cliente que a solicitou.
-- Enviar um e-mail para o cliente, informando:
-    - a criação da nova conta.
-    - e os seus respectivos dados.
 
-> Restrições
-- A Agência possui 4 dígitos.
-- A Conta possui 8 dígito.
-- Ambas podem ser geradas aleatoriamente (abstrair para usar um algoritmo específico depois).
-- O Código do Banco possui 3 dígitos.
-- O Saldo inicial deve ser nulo (igual a zero (0)).
-- O processo de criação deve ser disparado de forma a **não bloquear o retorno relativo ao aceite do usuário**:
-    - o cliente aceita e recebe uma menssagem que a conta será criada.
-    - a tela não deve ficar parada esperando até que a conta seja criada.
+## Processo de abertura de conta
 
-> Detalhes Adicionais
-- O e-mail não precisa ser real:
-    - o sistema deve estar preparado para lidar com e-mails falsos em ambiente de desenvolvimento e reais em de produção.
-- O processo de criação de conta só acontece depois que um **sistema externo** valida a documentação apresentada:
-    - a proposta deverá ter um **status** informando que ainda não foi liberada.
-    - após a liberação, o status da proposta deve ser alterado e a conta, criada.
-    - em caso de erro, precisamos tentar pelo menos 2x antes de desistir. (parametrizar, com intervalo de tempo entre os requests...)
+## Processo de transferência de dinheiro
 
-> Resultados Esperados
-- Status code 200, representando a criação de um novo recurso (conta).
-- Status code 400, indicando que a documentação apresentada não é válida e json de retorno com as informações.
 
-### 2 - Primeiro Acesso
-
-> Contexto
-- No primeiro acesso após a criação da conta, precisamos passar pelos processos de *`confirmação de identidade`* e de *`criação de nova senha`*. 
-
-> Necessidades
-- Requisitar novamente e-mail e CPF do cliente.
-- Enviar um e-mail para o cliente:
-    - contendo um token de 6 dígitos aleatórios associado a conta.
-    - este token deve ser fornecido pelo cliente para a criação da nova senha.
-- Solicitar que o cliente insira a nova senha.
-- Associar a senha à conta.
-- Enviar um e-mail para o cliente, informando que a senha foi alterada/criada.
-
-> Restrições
-- O token:
-    - tem tempo de expiração configurável no sistema.
-    - só pode ser usado uma vez.
-- A senha:
-    - é obrigatória.
-    - deve ser forte.
-    - deve conter 8 dígitos.
-    - precisa ser encodada com algum algoritmo de hash, para então ser persistida.
-
-> Resultados Esperados
-- Status code 400, caso o token tenha expirado.
-- Status code 400, caso o token já tenha sido usado.
-- Status code 200, caso tudo dê certo.
-
-### 3 - Recebimento de Dinheiro via Transferência
-
-> Contexto
-- O **`Cliente`** pode *`receber dinheiro via transferência bancária`*.
-- O sistema possui um endpoint que recebe notificações (feitas pelo mesmo banco ou um diferente) sobre novas transferências.
-
-> Necessidades
-- Informações das duas contas envolvidas, para armazenamento nos dois bancos.
-- Toda transferência possui um código único (ID).
-- Atualizar os saldos das contas creditada e debitada.
-
-> Ponto de Atenção
-- Duas ou mais requisições de transferência para a mesma conta podem chegar ao mesmo tempo.
-- Elas não precisam ser processadas em série.
-- Processar em paralelo usando threads?
-
-> Restrições
-- Todas as informações relativas a transferência são obrigatórias. 
-
-> Resultados Esperados
-- Status code 400, caso ocorra algum problema de validação (retornar json).
-- Status code 200, caso dê tudo certo.
-
-### 4 - Transferência para Contas de Outros Bancos
-
-> Contexto
-- O **`Cliente`** precisa ter a possibilidade de *`transferir dinheiro para contas de outros bancos`*.
-
-> Necessidades
-- Requisitar do cliente as seguintes informações sobre o **favorecido**:
-    - Banco, com:
-        - Nome (ENUM, com os bancos parceiros)
-    - Conta, com:
-        - Tipo:
-            - Poupança
-            - Corrente
-        - Agência
-        - Número
-        - Cada banco representa a conta de um jeito *.
-    - Deve ser favoritado?
-        - Se sim, salvar todos os dados necessários para fazer uma transferência novamente.
-        - Salvar atrelado à conta do cliente.
-- E sobre a **transferência** em si:
-    - Valor
-    - Data para realização
-    - Breve descrição da transação
-- Após a inserção de todos estes dados, a aplicação deve:
-    - Se comunicar com um **serviço externo** para verificar se as informações batem com as armazenadas pelo banco do favorecido.
-    - Requisitar à esse serviço o nome completo do favorecido.
-    - Mostrar para o cliente todos esses dados, para que ele possa confirmar a transação.
-- É necessário enviar dados para um **serviço externo**, responsável por rotear toda comunicação entre os bancos:
-    - O nosso cliente não precisa ficar esperando por isso.
-    - Caso necessário, a transferência deve ficar aguardando o serviço externo até ser processada.
-    - Em uma situação extrema, reagendá-la para o próximo dia útil e enviar um e-mail de aviso para o cliente.
-- A verificação de saldo suficiente deve ser feita logo antes de iniciar a transferência:
-    - Perceba que o cliente pode agendar uma transferência para uma data futura, mesmo não tendo saldo suficiente na data atual.
-    - Ele pode depositar ou receber alguma quantia neste meio tempo, o que torna a transferência futura possível.
-
-> Restrições
-- Sobre o favorecido:
-    - O banco deve estar entre os suportados.
-    - A agência deve possuir 4 números.
-- A transferência:
-    - não pode ser feita em um final de semana.
-    - nem fora do horário comercial (08:00 <-> 17:00).
-    - deve ser um valor positivo.
-
-> Resultados Esperados
-- Status code 400, caso:
-    - Não tenha saldo suficiente.
-    - A conta do favorecido não exista (está incorreta).
-- Status code 200, caso tudo dê certo.
-
-### 5 - Transferências para Contas do Mesmo Banco
-
-> Contexto
-- 
-
-> Necessidades
-- 
-
-> Restrições
-- 
-
-> Resultados Esperados
-- 
