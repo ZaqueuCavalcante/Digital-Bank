@@ -4,11 +4,10 @@ public class CPF extends Documento {
 
 //    private short[] numeroBase;
 //    private short regiaoFiscal;
-//    private short primeiroDigitoVerificador;
-//    private short segundoDigitoVerificador;
+//    private short primeiroDV;
+//    private short segundoDV;
 
     public CPF(String numero) {
-        // String digitos = cpfFormatado.replaceAll("[^\\d ]", "");
         super(numero);
     }
 
@@ -17,6 +16,7 @@ public class CPF extends Documento {
         if(numero.length() != 11) {
             throw new IllegalArgumentException("CPF inválido.");
         }
+        // Adicionar resto da validação...
         this.numero = numero;
     }
 

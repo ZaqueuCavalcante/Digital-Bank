@@ -34,6 +34,7 @@ public abstract class DataDeAgendamento {
             this.data = data.plusDays(1);
         }
     }
+
     // Podem ser extendidos para contemplar feriados (dões) tbm (Enum)...
 
 }

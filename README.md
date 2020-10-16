@@ -5,7 +5,7 @@ API para suportar o funcionamento de um **Banco Digital**.
 Desafio proposto durante o [Zup Bootcamp 2](https://www.zup.com.br), composto por duas etapas:
 
 1) Entrega do projeto, via GitHub.
-2) Produção de um vídeo contando como foi o **processo de desenvolvimento**, com ênfase nas **preocupações de segurança** da aplicação.
+2) Produção de um vídeo contando como foi o **processo de entender e desenvolver** a aplicação.
 
 ## Especificações do Projeto
 

@@ -6,7 +6,6 @@ import br.com.zup.digitalbank.dominio.clientes.dados.pessoais.Email;
 import br.com.zup.digitalbank.dominio.clientes.dados.pessoais.Nome;
 import br.com.zup.digitalbank.dominio.clientes.dados.pessoais.Senha;
 import br.com.zup.digitalbank.dominio.clientes.dados.pessoais.endereco.*;
-import br.com.zup.digitalbank.dominio.clientes.documentos.CNPJ;
 import br.com.zup.digitalbank.dominio.clientes.documentos.CPF;
 import br.com.zup.digitalbank.dominio.clientes.documentos.Documento;
 import br.com.zup.digitalbank.dominio.contas.Conta;
@@ -14,7 +13,6 @@ import br.com.zup.digitalbank.dominio.contas.atributos.Agencia;
 import br.com.zup.digitalbank.dominio.contas.atributos.DigitoVerificador;
 import br.com.zup.digitalbank.dominio.contas.atributos.Numero;
 import br.com.zup.digitalbank.dominio.contas.atributos.Tipo;
-import br.com.zup.digitalbank.dominio.transferencias.agendamentos.DataDeAgendamento;
 import br.com.zup.digitalbank.dominio.transferencias.Transferencia;
 import br.com.zup.digitalbank.dominio.transferencias.agendamentos.DataDeAgendamentoComRestricoes;
 import br.com.zup.digitalbank.dominio.transferencias.externas.TED;
@@ -49,10 +47,7 @@ public class DigitalbankApplication {
 				new Rua("Rua Tupy", "42"));
 		System.out.println(endereco.completo());
 
-		Documento documento = new CPF("119.245.284-44");
-		System.out.println(documento.numero());
-
-		documento = new CNPJ("75.954.151/0001-88");
+		Documento documento = new CPF("11924528444");
 		System.out.println(documento.numero());
 
 		Cliente cliente = new Cliente(42L, nome, email, dataDeNascimento, endereco, documento);

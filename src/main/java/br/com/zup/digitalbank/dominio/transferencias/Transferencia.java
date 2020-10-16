@@ -12,6 +12,7 @@ import java.util.TimerTask;
 
 public abstract class Transferencia extends TimerTask {
 
+    protected int id;
     protected Timer timer = new Timer();
 
     protected double valor;
@@ -38,7 +39,6 @@ public abstract class Transferencia extends TimerTask {
 
     public abstract double taxa();
 
-
     public void adicionarDescricao(String descricao) {
         this.descricao = descricao;
     }
@@ -56,13 +56,8 @@ public abstract class Transferencia extends TimerTask {
         timer.schedule(this, Date.from(instante));
     }
 
-    private void reagendar(DataDeAgendamento dataDeAgendamento) {
+    public void reagendar(DataDeAgendamento dataDeAgendamento) {
         this.dataDeAgendamento = dataDeAgendamento;
-    }
-
-    public void cancelar() {
-        timer.cancel();
-        timer.purge();
     }
 
 }

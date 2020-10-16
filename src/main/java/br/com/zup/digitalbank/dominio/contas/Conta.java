@@ -25,9 +25,7 @@ public class Conta {
     }
 
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-    public String agencia() {
-        return agencia.numero();
-    }
+    public String agencia() { return agencia.numero(); }
 
     public String tipo() {
         return tipo.codigo();

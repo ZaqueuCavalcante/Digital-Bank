@@ -11,6 +11,7 @@ public class CNPJ extends Documento {
         if(numero.length() != 14) {
             throw new IllegalArgumentException("CNPJ inválido.");
         }
+        // Adicionar resto da validação...
         this.numero = numero;
     }
 

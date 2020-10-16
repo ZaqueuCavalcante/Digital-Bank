@@ -29,8 +29,6 @@ public class Cliente {
         this.documento = documento;
     }
 
-    public void realizarTransferencia() { }
-
-    public void receberTransferencia() { }
+    // Adicionar ações/comportamentos de alto nível aqui...
 
 }
