@@ -109,14 +109,17 @@ Um posterior aprofundamento deve ser feito através da **colaboração** entre p
 > [Órgãos reguladores do Mercado financeiro nacional](https://www.parmais.com.br/blog/orgaos-reguladores-do-mercado-financeiro/)
 
 
-
-
-
-
-
-
-
 ## Processo de abertura de conta
+
+Um cliente pode ter basicamente dois tipos de contas:
+- As de Pessoa Física, direcionadas para o gerenciamento financeiro pessoal.
+- As de Pessoa Jurídica, direcionadas para o gerenciamento financeiro da sua empresa.
+
+Essa separação é fundamental, pois cada tipo de conta possui finalidades e características específicas.
+
+
+
+
 
 ## Processo de transferência de dinheiro
 
