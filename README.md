@@ -117,10 +117,14 @@ Um cliente pode ter basicamente dois tipos de contas:
 
 Essa separação é fundamental, pois cada tipo de conta possui finalidades e características específicas.
 
-
-
-
-
 ## Processo de transferência de dinheiro
 
+TED
+DOC
+PIX e como ele vai revolucionar as transferências bancárias
 
+TEV
+
+## Reguladores
+
+O **Banco Central do Brasil** regulamenta e supervisiona o funcionamento dos bancos. Ele impõe novas regras de funcionamento, políticas e funcionalidades financeiras que os bancos devem disponibilizar e seguir. É impossível para um banco manter a operação do negócio sem essa integração com o BCB.
