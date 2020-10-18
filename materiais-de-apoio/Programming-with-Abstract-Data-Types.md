@@ -54,4 +54,4 @@
     - Isso livra o programador da preocupação de lidar com detalhes de implementação, dando-o a oportunidade de focar na resolução do problema.
     - Programas feitos dessa maneira são mais modulares, fáceis de entender, modificar, testar, manter e de provar corretos.
 
-> Fonte: [Programming with Abstract Data Types - Barbara Liscov, Stephen Zilles]()
+> Fonte: [Programming with Abstract Data Types - Barbara Liscov, Stephen Zilles](https://github.com/ZaqueuCavalcante/Digital-Bank/blob/main/materiais-de-apoio/PDFs/Programming-with-abstract-data-types.pdf)

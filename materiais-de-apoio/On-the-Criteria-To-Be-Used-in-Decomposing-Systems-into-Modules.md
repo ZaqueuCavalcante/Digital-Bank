@@ -30,4 +30,4 @@
     - Cada módulo é então projetado para **esconder** tal decisão dos outros.
     - Para alcançar uma implementação eficiente, devemos abandonar a suposição de que um módulo é uma ou mais sub-rotinas.
 
-> Fonte: [On the Criteria To Be Used in Decomposing Systems into Modules - D.L. Parnas]()
+> Fonte: [On the Criteria To Be Used in Decomposing Systems into Modules - D.L. Parnas](https://github.com/ZaqueuCavalcante/Digital-Bank/blob/main/materiais-de-apoio/PDFs/On-the-criteria-to-be-used-in-decomposing-systems-into-modules.pdf)
