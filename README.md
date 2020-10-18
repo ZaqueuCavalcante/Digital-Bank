@@ -119,11 +119,15 @@ Essa separação é fundamental, pois cada tipo de conta possui finalidades e ca
 
 ## Processo de transferência de dinheiro
 
-TED
-DOC
-PIX e como ele vai revolucionar as transferências bancárias
+- Externas
+    - TED
+    - DOC
+    - PIX
+        - Como ele vai revolucionar as transferências bancárias?
+        - Vai deixar todas as demais obsoletas?
 
-TEV
+- Internas
+    - TEV
 
 ## Reguladores
 
